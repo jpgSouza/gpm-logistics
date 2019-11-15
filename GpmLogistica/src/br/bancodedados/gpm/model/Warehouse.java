@@ -10,5 +10,9 @@ package br.bancodedados.gpm.model;
  * @author joao_
  */
 public class Warehouse {
+    private String street;
+    private int number;
+    private String district;
+    private String phone;
     
 }

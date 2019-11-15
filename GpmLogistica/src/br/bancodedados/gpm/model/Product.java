@@ -10,5 +10,7 @@ package br.bancodedados.gpm.model;
  * @author joao_
  */
 public class Product {
-    
+    private String name;
+    private String type;
+    private String provider;
 }

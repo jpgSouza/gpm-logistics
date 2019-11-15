@@ -10,5 +10,10 @@ package br.bancodedados.gpm.model;
  * @author joao_
  */
 public class Driver {
-    
+    private String name;
+    private int age;
+    private String salary;
+    private String gender;
+    private String date;
+ 
 }

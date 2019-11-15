@@ -10,5 +10,7 @@ package br.bancodedados.gpm.model;
  * @author joao_
  */
 public class Truck {
+    private String model;
+    private int capacity;
     
 }
