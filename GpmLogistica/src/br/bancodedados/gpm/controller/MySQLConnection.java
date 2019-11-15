@@ -34,13 +34,10 @@ public class MySQLConnection {
     
     public void connectMySQL(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Successful Connection!");
         }catch(SQLException e){
             System.out.println("Error: " + e.getMessage());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

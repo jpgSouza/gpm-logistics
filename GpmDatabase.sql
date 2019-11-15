@@ -2,6 +2,32 @@ create database if not exists transportadora;
 
 use transportadora;
 
+create table if not exists caminhao(
+	id_caminhao integer not null auto_increment,
+    modelo varchar(30) not null,
+	capacidade integer not null,
+    id_produto integer unique,
+    
+    primary key (id_caminhao),
+    
+    constraint fk_id_produto 
+    foreign key (id_produto) 
+    references produto(id_produto)
+    
+    on delete cascade
+    on update cascade
+    
+);
+
+create table if not exists produto(
+	id_produto integer not null auto_increment,
+	nome varchar(30) not null,
+    tipo varchar(30) not null,
+    fornecedor varchar(30),
+    
+    primary key (id_produto)
+);
+
 create table if not exists deposito(
 	id_deposito integer not null auto_increment,
 	rua varchar(30) not null,
@@ -38,32 +64,6 @@ create table if not exists motorista(
     data_entrada date,
     
     primary key (id_motorista)
-);
-
-create table if not exists caminhao(
-	id_caminhao integer not null auto_increment,
-    modelo varchar(30) not null,
-	capacidade integer not null,
-    id_produto integer unique,
-    
-    primary key (id_caminhao),
-    
-    constraint fk_id_produto 
-    foreign key (id_produto) 
-    references produto(id_produto)
-    
-    on delete cascade
-    on update cascade
-    
-);
-
-create table if not exists produto(
-	id_produto integer not null auto_increment,
-	nome varchar(30) not null,
-    tipo varchar(30) not null,
-    fornecedor varchar(30),
-    
-    primary key (id_produto)
 );
 
 create table if not exists motorista_drives_caminhao(
