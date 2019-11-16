@@ -86,3 +86,7 @@ create table if not exists motorista_drives_caminhao(
     on delete cascade
     on update cascade    
 );
+
+drop table deposito;
+select * from deposito;
+

@@ -5,19 +5,29 @@
  */
 package br.bancodedados.gpm.view;
 
+import br.bancodedados.gpm.controller.MySQLConnection;
+import br.bancodedados.gpm.model.Warehouse;
+import br.bancodedados.gpm.model.dao.WarehouseDAO;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author joao_
  */
 public class UserView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UserView
-     */
+    MySQLConnection mySQLConnection = new MySQLConnection();
+    
     public UserView() {
         initComponents();
+        mySQLConnection.connectMySQL();
+        DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+        jTable1.setRowSorter(new TableRowSorter(dtm));
         this.setLocationRelativeTo(null);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -110,13 +120,27 @@ public class UserView extends javax.swing.JFrame {
 
         jLabel4.setText("TELEFONE");
 
+        jbt_register_warehouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_add_126583.png"))); // NOI18N
         jbt_register_warehouse.setText("CADASTRAR");
+        jbt_register_warehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_register_warehouseActionPerformed(evt);
+            }
+        });
 
+        jbt_delete_warehouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_close_309090.png"))); // NOI18N
         jbt_delete_warehouse.setText("EXCLUIR");
 
+        jbt_edit_warehouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_new-24_103173.png"))); // NOI18N
         jbt_edit_warehouse.setText("EDITAR");
 
+        jbt_clear_warehouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"))); // NOI18N
         jbt_clear_warehouse.setText("LIMPAR");
+        jbt_clear_warehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_clear_warehouseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -229,7 +253,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -253,7 +277,7 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("DEPÓSITO", jPanel1);
+        jTabbedPane1.addTab("DEPÓSITO", new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_warehouse_103222 (1).png")), jPanel1); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -273,13 +297,19 @@ public class UserView extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("FORNECEDOR");
 
+        jbt_register_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_add_126583.png"))); // NOI18N
         jbt_register_product.setText("CADASTRAR");
 
+        jbt_delete_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_close_309090.png"))); // NOI18N
         jbt_delete_product.setText("EXCLUIR");
 
+        jbt_edit_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_new-24_103173.png"))); // NOI18N
         jbt_edit_product.setText("EDITAR");
 
+        jbt_clear_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"))); // NOI18N
         jbt_clear_product.setText("LIMPAR");
+
+        jbt_register_product1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_search_322497.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -389,7 +419,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -400,7 +430,7 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -413,7 +443,7 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("PRODUTOS", jPanel2);
+        jTabbedPane1.addTab("PRODUTOS", new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_products_4301793.png")), jPanel2); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -507,10 +537,13 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        jbt_register_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_add_126583.png"))); // NOI18N
         jbt_register_truck.setText("CADASTRAR");
 
+        jbt_delete_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_close_309090.png"))); // NOI18N
         jbt_delete_truck.setText("EXCLUIR");
 
+        jbt_clear_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"))); // NOI18N
         jbt_clear_truck.setText("LIMPAR");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -606,7 +639,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -618,7 +651,7 @@ public class UserView extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -630,7 +663,7 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("CAMINHÃO", jPanel3);
+        jTabbedPane1.addTab("CAMINHÃO", new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_truck_1608963.png")), jPanel3); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -651,6 +684,27 @@ public class UserView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbt_register_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_warehouseActionPerformed
+        
+        WarehouseDAO warehouseDAO = new WarehouseDAO();
+        Warehouse warehouse = new Warehouse();
+        
+        warehouse.setStreet(jtf_street.getText());
+        warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
+        warehouse.setPhone(jtf_phone.getText());
+        warehouse.setDistrict(jtf_district.getText());
+        
+        setToNull();
+        
+        warehouseDAO.insertWarehouse(mySQLConnection, warehouse);
+        
+        readTable();
+    }//GEN-LAST:event_jbt_register_warehouseActionPerformed
+
+    private void jbt_clear_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_warehouseActionPerformed
+        setToNull();
+    }//GEN-LAST:event_jbt_clear_warehouseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -685,6 +739,29 @@ public class UserView extends javax.swing.JFrame {
                 new UserView().setVisible(true);
             }
         });
+    }
+    
+    public void setToNull(){
+        jtf_street.setText("");
+        jtf_district.setText("");
+        jtf_number.setText("");
+        jtf_phone.setText("");
+    }
+    
+    public void readTable(){
+        
+        WarehouseDAO warehouseDAO = new WarehouseDAO();
+        DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+        dtm.setNumRows(0);
+        
+        for (Warehouse w : warehouseDAO.listWarehouseTable(mySQLConnection)){
+            dtm.addRow(new Object[]{
+                w.getStreet(),
+                w.getDistrict(),
+                w.getPhone(),
+                w.getNumber()
+            });
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

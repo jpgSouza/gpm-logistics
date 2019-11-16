@@ -71,6 +71,9 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="DEP&#xd3;SITO">
                 <Property name="tabTitle" type="java.lang.String" value="DEP&#xd3;SITO"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_warehouse_103222 (1).png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -232,23 +235,41 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_register_warehouse">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_add_126583.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="CADASTRAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_register_warehouseActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_delete_warehouse">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_close_309090.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="EXCLUIR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_edit_warehouse">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_new-24_103173.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="EDITAR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_clear_warehouse">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="LIMPAR"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_clear_warehouseActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -269,7 +290,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="194" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="186" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -314,6 +335,9 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="PRODUTOS">
                 <Property name="tabTitle" type="java.lang.String" value="PRODUTOS"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_products_4301793.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -325,7 +349,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jPanel8" max="32767" attributes="0"/>
-                          <Component id="jPanel7" pref="882" max="32767" attributes="0"/>
+                          <Component id="jPanel7" pref="902" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -480,27 +504,44 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_register_product">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_add_126583.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="CADASTRAR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_delete_product">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_close_309090.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="EXCLUIR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_edit_product">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_new-24_103173.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="EDITAR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_clear_product">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="LIMPAR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf_search_product">
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_register_product1">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_search_322497.png"/>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -521,7 +562,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="194" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="186" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -565,6 +606,9 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="CAMINH&#xc3;O">
                 <Property name="tabTitle" type="java.lang.String" value="CAMINH&#xc3;O"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_truck_1608963.png"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -578,7 +622,7 @@
                           <Component id="jPanel10" max="32767" attributes="0"/>
                           <Component id="jPanel9" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -842,16 +886,25 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="jbt_register_truck">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_add_126583.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="CADASTRAR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_delete_truck">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_close_309090.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="EXCLUIR"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbt_clear_truck">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="LIMPAR"/>
                   </Properties>
                 </Component>
@@ -874,7 +927,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane3" alignment="0" pref="169" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" pref="161" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
