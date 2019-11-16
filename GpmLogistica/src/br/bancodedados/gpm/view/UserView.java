@@ -25,6 +25,7 @@ public class UserView extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
         jTable1.setRowSorter(new TableRowSorter(dtm));
         this.setLocationRelativeTo(null);
+        //Tenta colocar o readTable() aqui pra você ver o erro
     }
     
     
