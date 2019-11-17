@@ -26,6 +26,7 @@ public class UserView extends javax.swing.JFrame {
         jTable1.setRowSorter(new TableRowSorter(dtm));
         this.setLocationRelativeTo(null);
         //Tenta colocar o readTable() aqui pra você ver o erro
+        readTable();
     }
     
     
@@ -131,9 +132,19 @@ public class UserView extends javax.swing.JFrame {
 
         jbt_delete_warehouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_close_309090.png"))); // NOI18N
         jbt_delete_warehouse.setText("EXCLUIR");
+        jbt_delete_warehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_delete_warehouseActionPerformed(evt);
+            }
+        });
 
         jbt_edit_warehouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_new-24_103173.png"))); // NOI18N
         jbt_edit_warehouse.setText("EDITAR");
+        jbt_edit_warehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_edit_warehouseActionPerformed(evt);
+            }
+        });
 
         jbt_clear_warehouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"))); // NOI18N
         jbt_clear_warehouse.setText("LIMPAR");
@@ -242,6 +253,11 @@ public class UserView extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -695,17 +711,56 @@ public class UserView extends javax.swing.JFrame {
         warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
         warehouse.setPhone(jtf_phone.getText());
         warehouse.setDistrict(jtf_district.getText());
-        
-        setToNull();
-        
+       
         warehouseDAO.insertWarehouse(mySQLConnection, warehouse);
         
         readTable();
+        
+        setToNull();
     }//GEN-LAST:event_jbt_register_warehouseActionPerformed
 
     private void jbt_clear_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_warehouseActionPerformed
         setToNull();
     }//GEN-LAST:event_jbt_clear_warehouseActionPerformed
+
+    private void jbt_edit_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_edit_warehouseActionPerformed
+        
+        Warehouse warehouse = new Warehouse();
+        WarehouseDAO warehouseDAO = new WarehouseDAO();
+        
+        warehouse.setDistrict(jtf_district.getText());
+        warehouse.setStreet(jtf_street.getText());
+        warehouse.setPhone(jtf_phone.getText());
+        warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
+        
+        warehouseDAO.editWarehouse(mySQLConnection, warehouse);
+        
+        readTable();
+        
+        setToNull();
+        
+    }//GEN-LAST:event_jbt_edit_warehouseActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        recoveryBlanks();
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jbt_delete_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_warehouseActionPerformed
+        
+        Warehouse warehouse = new Warehouse();
+        WarehouseDAO warehouseDAO = new WarehouseDAO();
+        
+        warehouse.setStreet(jtf_street.getText());
+        
+        warehouseDAO.deleteWarehouse(mySQLConnection, warehouse.getStreet());
+        
+        readTable();
+        
+        setToNull();
+        
+    }//GEN-LAST:event_jbt_delete_warehouseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -751,10 +806,10 @@ public class UserView extends javax.swing.JFrame {
     
     public void readTable(){
         
-        WarehouseDAO warehouseDAO = new WarehouseDAO();
         DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
         dtm.setNumRows(0);
-        
+        WarehouseDAO warehouseDAO = new WarehouseDAO();
+         
         for (Warehouse w : warehouseDAO.listWarehouseTable(mySQLConnection)){
             dtm.addRow(new Object[]{
                 w.getStreet(),
@@ -763,6 +818,15 @@ public class UserView extends javax.swing.JFrame {
                 w.getNumber()
             });
         }
+    }
+    
+    public void recoveryBlanks(){
+        DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+        int index = jTable1.getSelectedRow();
+        jtf_street.setText(dtm.getValueAt(index, 0).toString());
+        jtf_district.setText(dtm.getValueAt(index, 1).toString());
+        jtf_phone.setText(dtm.getValueAt(index, 2).toString());
+        jtf_number.setText(dtm.getValueAt(index, 3).toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
