@@ -39,15 +39,7 @@ public class WarehouseDAO {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
             sucess = false;
-        }/*finally{
-            try{
-                connection.getConnection().close();
-                connection.getPreparedStatement().close();
-            }catch(SQLException e){
-                System.out.println("Error: " + e.getMessage());
-            }
-        }*/
-
+        }
         return sucess;
 
     }
@@ -73,14 +65,8 @@ public class WarehouseDAO {
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             sucess = false;
-        }/*finally{
-            try{
-                connection.getConnection().close();
-                connection.getStatement().close();
-            }catch(SQLException e){
-                System.out.println("Error: " + e.getMessage());
-            }
-        }*/
+        }
+        
         return warehouseList;
     }
 

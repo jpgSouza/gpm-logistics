@@ -5,8 +5,7 @@
         <group>
             <file>file:/C:/Users/joao_/Documents/Git-Projects/gpm-logistics/GpmLogistica/src/br/bancodedados/gpm/view/UserView.java</file>
             <file>file:/C:/Users/joao_/Documents/Git-Projects/gpm-logistics/GpmLogistica/src/br/bancodedados/gpm/model/dao/WarehouseDAO.java</file>
-            <file>file:/C:/Users/joao_/Documents/Git-Projects/gpm-logistics/GpmLogistica/src/br/bancodedados/gpm/controller/MySQLConnection.java</file>
-            <file>file:/C:/Users/joao_/Documents/Git-Projects/gpm-logistics/GpmLogistica/src/br/bancodedados/gpm/model/Warehouse.java</file>
+            <file>file:/C:/Users/joao_/Documents/Git-Projects/gpm-logistics/GpmLogistica/src/br/bancodedados/gpm/model/dao/ProductDAO.java</file>
         </group>
     </open-files>
 </project-private>

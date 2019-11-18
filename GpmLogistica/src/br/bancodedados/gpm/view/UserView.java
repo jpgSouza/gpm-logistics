@@ -6,8 +6,11 @@
 package br.bancodedados.gpm.view;
 
 import br.bancodedados.gpm.controller.MySQLConnection;
+import br.bancodedados.gpm.model.Product;
 import br.bancodedados.gpm.model.Warehouse;
+import br.bancodedados.gpm.model.dao.ProductDAO;
 import br.bancodedados.gpm.model.dao.WarehouseDAO;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -18,18 +21,19 @@ import javax.swing.table.TableRowSorter;
 public class UserView extends javax.swing.JFrame {
 
     MySQLConnection mySQLConnection = new MySQLConnection();
-    
+
     public UserView() {
         initComponents();
         mySQLConnection.connectMySQL();
-        DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         jTable1.setRowSorter(new TableRowSorter(dtm));
         this.setLocationRelativeTo(null);
-        //Tenta colocar o readTable() aqui pra você ver o erro
-        readTable();
+
+        jtf_id.setEditable(false);
+
+        readWarehouseTable();
+        readProductTable();
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,6 +45,7 @@ public class UserView extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -73,6 +78,12 @@ public class UserView extends javax.swing.JFrame {
         jbt_clear_product = new javax.swing.JButton();
         jtf_search_product = new javax.swing.JTextField();
         jbt_register_product1 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jtf_id = new javax.swing.JTextField();
+        jrb_id_button = new javax.swing.JRadioButton();
+        jrb_name_button = new javax.swing.JRadioButton();
+        jrb_type_button = new javax.swing.JRadioButton();
+        jrb_provider_button = new javax.swing.JRadioButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -100,6 +111,10 @@ public class UserView extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,24 +177,17 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jtf_street)
+                            .addComponent(jLabel2)
+                            .addComponent(jtf_district, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                        .addGap(44, 44, 44)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jtf_street)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jtf_district, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
-                                .addGap(44, 44, 44)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jtf_number, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addComponent(jLabel4)
-                            .addComponent(jtf_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(96, 96, 96))
+                            .addComponent(jLabel3)
+                            .addComponent(jtf_number, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4)
+                    .addComponent(jtf_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jbt_register_warehouse)
                         .addGap(18, 18, 18)
@@ -187,8 +195,8 @@ public class UserView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbt_edit_warehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbt_clear_warehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jbt_clear_warehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(392, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +278,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -316,17 +324,57 @@ public class UserView extends javax.swing.JFrame {
 
         jbt_register_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_add_126583.png"))); // NOI18N
         jbt_register_product.setText("CADASTRAR");
+        jbt_register_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_register_productActionPerformed(evt);
+            }
+        });
 
         jbt_delete_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_close_309090.png"))); // NOI18N
         jbt_delete_product.setText("EXCLUIR");
+        jbt_delete_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_delete_productActionPerformed(evt);
+            }
+        });
 
         jbt_edit_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_new-24_103173.png"))); // NOI18N
         jbt_edit_product.setText("EDITAR");
+        jbt_edit_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_edit_productActionPerformed(evt);
+            }
+        });
 
         jbt_clear_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"))); // NOI18N
         jbt_clear_product.setText("LIMPAR");
+        jbt_clear_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_clear_productActionPerformed(evt);
+            }
+        });
 
         jbt_register_product1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_search_322497.png"))); // NOI18N
+        jbt_register_product1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_register_product1ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("ID");
+
+        buttonGroup2.add(jrb_id_button);
+        jrb_id_button.setText("ID");
+
+        buttonGroup2.add(jrb_name_button);
+        jrb_name_button.setText("NOME");
+
+        buttonGroup2.add(jrb_type_button);
+        jrb_type_button.setText("TIPO");
+
+        buttonGroup2.add(jrb_provider_button);
+        jrb_provider_button.setText("FORNECEDOR");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -335,8 +383,6 @@ public class UserView extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -346,6 +392,14 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jbt_register_product)
                         .addGap(18, 18, 18)
                         .addComponent(jbt_delete_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,9 +408,19 @@ public class UserView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbt_clear_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72)
-                        .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbt_register_product1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jrb_id_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jrb_name_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jrb_type_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jrb_provider_button))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbt_register_product1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -373,10 +437,20 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jtf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jrb_id_button)
+                            .addComponent(jrb_name_button)
+                            .addComponent(jrb_type_button)
+                            .addComponent(jrb_provider_button))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbt_register_product)
                             .addComponent(jbt_delete_product)
@@ -393,37 +467,42 @@ public class UserView extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "NOME", "TIPO", "FORNECEDOR"
+                "ID", "NOME", "TIPO", "FORNECEDOR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -436,7 +515,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -562,6 +641,11 @@ public class UserView extends javax.swing.JFrame {
 
         jbt_clear_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"))); // NOI18N
         jbt_clear_truck.setText("LIMPAR");
+        jbt_clear_truck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_clear_truckActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -656,7 +740,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -682,6 +766,25 @@ public class UserView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("CAMINHÃO", new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_truck_1608963.png")), jPanel3); // NOI18N
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_disc-list_1954536.png"))); // NOI18N
+        jMenu1.setText("Opções");
+
+        jMenuItem1.setText("Sair");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_help_172477.png"))); // NOI18N
+        jMenu2.setText("Ajuda");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -703,64 +806,182 @@ public class UserView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbt_register_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_warehouseActionPerformed
-        
+
         WarehouseDAO warehouseDAO = new WarehouseDAO();
         Warehouse warehouse = new Warehouse();
-        
+
         warehouse.setStreet(jtf_street.getText());
         warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
         warehouse.setPhone(jtf_phone.getText());
         warehouse.setDistrict(jtf_district.getText());
-       
+
         warehouseDAO.insertWarehouse(mySQLConnection, warehouse);
-        
-        readTable();
-        
-        setToNull();
+
+        readWarehouseTable();
+
+        setToNullWarehouse();
     }//GEN-LAST:event_jbt_register_warehouseActionPerformed
 
     private void jbt_clear_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_warehouseActionPerformed
-        setToNull();
+        setToNullWarehouse();
     }//GEN-LAST:event_jbt_clear_warehouseActionPerformed
 
     private void jbt_edit_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_edit_warehouseActionPerformed
-        
+
         Warehouse warehouse = new Warehouse();
         WarehouseDAO warehouseDAO = new WarehouseDAO();
-        
-        warehouse.setDistrict(jtf_district.getText());
-        warehouse.setStreet(jtf_street.getText());
-        warehouse.setPhone(jtf_phone.getText());
-        warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
-        
-        warehouseDAO.editWarehouse(mySQLConnection, warehouse);
-        
-        readTable();
-        
-        setToNull();
-        
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int index = jTable1.getSelectedRow();
+        if (jTable1.isRowSelected(index)) {
+            warehouse.setDistrict(jtf_district.getText());
+            warehouse.setStreet(jtf_street.getText());
+            warehouse.setPhone(jtf_phone.getText());
+            warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
+
+            warehouseDAO.editWarehouse(mySQLConnection, warehouse);
+
+            readWarehouseTable();
+
+            setToNullWarehouse();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+
+
     }//GEN-LAST:event_jbt_edit_warehouseActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
-        recoveryBlanks();
-        
+
+        recoveryBlanksWarehouse();
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jbt_delete_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_warehouseActionPerformed
-        
+
         Warehouse warehouse = new Warehouse();
         WarehouseDAO warehouseDAO = new WarehouseDAO();
-        
-        warehouse.setStreet(jtf_street.getText());
-        
-        warehouseDAO.deleteWarehouse(mySQLConnection, warehouse.getStreet());
-        
-        readTable();
-        
-        setToNull();
-        
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int index = jTable1.getSelectedRow();
+        if (jTable1.isRowSelected(index)) {
+            warehouse.setStreet(jtf_street.getText());
+
+            warehouseDAO.deleteWarehouse(mySQLConnection, warehouse.getStreet());
+
+            readWarehouseTable();
+
+            setToNullWarehouse();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+
+
     }//GEN-LAST:event_jbt_delete_warehouseActionPerformed
+
+    private void jbt_register_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_productActionPerformed
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+
+        product.setName(jtf_name.getText());
+        product.setProvider(jtf_provider.getText());
+        product.setType(jcb_type.getSelectedItem().toString());
+
+        productDAO.insertProduct(mySQLConnection, product);
+
+        productDAO.listProductTable(mySQLConnection);
+
+        readProductTable();
+
+        setToNullProduct();
+    }//GEN-LAST:event_jbt_register_productActionPerformed
+
+    private void jbt_clear_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_truckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbt_clear_truckActionPerformed
+
+    private void jbt_clear_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_productActionPerformed
+        setToNullProduct();
+    }//GEN-LAST:event_jbt_clear_productActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        LoginView loginView = new LoginView();
+        mySQLConnection.disconectMySQL();
+        this.dispose();
+        loginView.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        recoveryBlanksProducts();
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jbt_edit_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_edit_productActionPerformed
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        int index = jTable2.getSelectedRow();
+        if (jTable2.isRowSelected(index)) {
+            product.setProductID(Integer.parseInt(jtf_id.getText()));
+            product.setName(jtf_name.getText());
+            product.setType(jcb_type.getSelectedItem().toString());
+            product.setProvider(jtf_provider.getText());
+
+            productDAO.editProduct(mySQLConnection, product);
+
+            readProductTable();
+
+            setToNullProduct();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }//GEN-LAST:event_jbt_edit_productActionPerformed
+
+    private void jbt_delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_productActionPerformed
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        int index = jTable2.getSelectedRow();
+        if (jTable2.isRowSelected(index)) {
+            product.setProductID(Integer.parseInt(jtf_id.getText()));
+
+            productDAO.deleteProduct(mySQLConnection, product.getProductID());
+
+            readProductTable();
+
+            setToNullProduct();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }//GEN-LAST:event_jbt_delete_productActionPerformed
+
+    private void jbt_register_product1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_product1ActionPerformed
+        String filter = null;
+        String value = null;
+        if (jrb_id_button.isSelected()) {
+            filter = "id_produto";
+        }
+        if (jrb_name_button.isSelected()) {
+            filter = "nome";
+        }
+        if (jrb_type_button.isSelected()) {
+            filter = "tipo";
+        }
+        if (jrb_provider_button.isSelected()) {
+            filter = "fornecedor";
+        }
+
+        value = jtf_search_product.getText();
+
+        ProductDAO productDAO = new ProductDAO();
+        productDAO.searchProduct(mySQLConnection, filter, value);
+
+        filterProductTable(filter, value);
+
+        jtf_search_product.setText("");
+
+    }//GEN-LAST:event_jbt_register_product1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -796,21 +1017,28 @@ public class UserView extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void setToNull(){
+
+    public void setToNullWarehouse() {
         jtf_street.setText("");
         jtf_district.setText("");
         jtf_number.setText("");
         jtf_phone.setText("");
     }
-    
-    public void readTable(){
-        
-        DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+
+    public void setToNullProduct() {
+        jtf_name.setText("");
+        jtf_provider.setText("");
+        jtf_id.setText("");
+        jcb_type.setSelectedIndex(0);
+    }
+
+    public void readWarehouseTable() {
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setNumRows(0);
         WarehouseDAO warehouseDAO = new WarehouseDAO();
-         
-        for (Warehouse w : warehouseDAO.listWarehouseTable(mySQLConnection)){
+
+        for (Warehouse w : warehouseDAO.listWarehouseTable(mySQLConnection)) {
             dtm.addRow(new Object[]{
                 w.getStreet(),
                 w.getDistrict(),
@@ -819,9 +1047,41 @@ public class UserView extends javax.swing.JFrame {
             });
         }
     }
-    
-    public void recoveryBlanks(){
-        DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+
+    public void readProductTable() {
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        dtm.setNumRows(0);
+        ProductDAO productDAO = new ProductDAO();
+
+        for (Product p : productDAO.listProductTable(mySQLConnection)) {
+            dtm.addRow(new Object[]{
+                p.getProductID(),
+                p.getName(),
+                p.getType(),
+                p.getProvider()
+            });
+        }
+    }
+
+    public void filterProductTable(String filter, String value) {
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        dtm.setNumRows(0);
+        ProductDAO productDAO = new ProductDAO();
+
+        for (Product p : productDAO.searchProduct(mySQLConnection, filter, value)) {
+            dtm.addRow(new Object[]{
+                p.getProductID(),
+                p.getName(),
+                p.getType(),
+                p.getProvider()
+            });
+        }
+    }
+
+    public void recoveryBlanksWarehouse() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         int index = jTable1.getSelectedRow();
         jtf_street.setText(dtm.getValueAt(index, 0).toString());
         jtf_district.setText(dtm.getValueAt(index, 1).toString());
@@ -829,14 +1089,26 @@ public class UserView extends javax.swing.JFrame {
         jtf_number.setText(dtm.getValueAt(index, 3).toString());
     }
 
+    public void recoveryBlanksProducts() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        int index = jTable2.getSelectedRow();
+        jtf_id.setText(dtm.getValueAt(index, 0).toString());
+        jtf_name.setText(dtm.getValueAt(index, 1).toString());
+        jcb_type.setSelectedItem(dtm.getValueAt(index, 2).toString());
+        jtf_provider.setText(dtm.getValueAt(index, 3).toString());
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -845,6 +1117,10 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -876,11 +1152,16 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JButton jbt_register_warehouse;
     private javax.swing.JComboBox<String> jcb_type;
     private javax.swing.JRadioButton jrb_female_driver;
+    private javax.swing.JRadioButton jrb_id_button;
     private javax.swing.JRadioButton jrb_male_driver;
+    private javax.swing.JRadioButton jrb_name_button;
+    private javax.swing.JRadioButton jrb_provider_button;
+    private javax.swing.JRadioButton jrb_type_button;
     private javax.swing.JTextField jtf_age_driver;
     private javax.swing.JTextField jtf_capacity_truck;
     private javax.swing.JTextField jtf_datetime_driver;
     private javax.swing.JTextField jtf_district;
+    private javax.swing.JTextField jtf_id;
     private javax.swing.JTextField jtf_model_truck;
     private javax.swing.JTextField jtf_name;
     private javax.swing.JTextField jtf_name_driver;

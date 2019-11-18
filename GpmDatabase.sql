@@ -87,6 +87,8 @@ create table if not exists motorista_drives_caminhao(
     on update cascade    
 );
 
-drop table deposito;
+drop table produto;
 select * from deposito;
+select * from produto;
+select * from produto where nome = "Ferro";
 

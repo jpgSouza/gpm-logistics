@@ -40,6 +40,15 @@ public class MySQLConnection {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    
+    public void disconectMySQL(){
+        try{
+            connection.close();
+            System.out.println("Disconnected!");
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
 
     public void setPreparedStatement(PreparedStatement preparedStatement) {
         this.preparedStatement = preparedStatement;
