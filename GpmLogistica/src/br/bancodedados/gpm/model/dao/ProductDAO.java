@@ -21,12 +21,16 @@ public class ProductDAO {
     boolean sucess = false;
 
     public boolean insertProduct(MySQLConnection connection, Product product) {
-        String insertCommand = "INSERT INTO produto (nome,tipo,fornecedor)VALUES(?,?,?)";
+        String insertCommand = "INSERT INTO produto (nome,tipo,fornecedor,id_deposito)VALUES(?,?,?,?)";
         try {
             connection.setPreparedStatement(connection.getConnection().prepareStatement(insertCommand));
             connection.getPreparedStatement().setString(1, product.getName());
             connection.getPreparedStatement().setString(2, product.getType());
             connection.getPreparedStatement().setString(3, product.getProvider());
+            WarehouseDAO warehouseDAO = new WarehouseDAO();
+            ArrayList<Warehouse> warehouseAux = warehouseDAO.listWarehouseTable(connection);
+            product.setProductID(warehouseAux.get(0).getIdDeposito());
+            connection.getPreparedStatement().setInt(4, product.getProductID());
             connection.getPreparedStatement().execute();
             sucess = true;
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
@@ -105,6 +109,9 @@ public class ProductDAO {
         ArrayList<Product> productList = new ArrayList<>();
 
         String selectCommand = "SELECT * FROM produto WHERE " + filter + " = " + value;
+        if (!filter.equals("id_produto")) {
+            selectCommand = "SELECT * FROM produto WHERE " + filter + " = '" + value + "'";
+        }
         try {
             connection.setStatement(connection.getConnection().createStatement());
             connection.setResult(connection.getStatement().executeQuery(selectCommand));

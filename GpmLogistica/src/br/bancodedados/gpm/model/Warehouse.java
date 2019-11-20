@@ -10,10 +10,20 @@ package br.bancodedados.gpm.model;
  * @author joao_
  */
 public class Warehouse {
+    
+    private int idDeposito;
     private String street;
     private int number;
     private String district;
     private String phone;
+
+    public int getIdDeposito() {
+        return idDeposito;
+    }
+
+    public void setIdDeposito(int idDeposito) {
+        this.idDeposito = idDeposito;
+    }
 
     public String getStreet() {
         return street;

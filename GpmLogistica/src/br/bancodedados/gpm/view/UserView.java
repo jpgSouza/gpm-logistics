@@ -56,11 +56,11 @@ public class UserView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtf_number = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jtf_phone = new javax.swing.JTextField();
         jbt_register_warehouse = new javax.swing.JButton();
         jbt_delete_warehouse = new javax.swing.JButton();
         jbt_edit_warehouse = new javax.swing.JButton();
         jbt_clear_warehouse = new javax.swing.JButton();
+        jtf_phone = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -77,13 +77,14 @@ public class UserView extends javax.swing.JFrame {
         jbt_edit_product = new javax.swing.JButton();
         jbt_clear_product = new javax.swing.JButton();
         jtf_search_product = new javax.swing.JTextField();
-        jbt_register_product1 = new javax.swing.JButton();
+        jbt_search_product = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jtf_id = new javax.swing.JTextField();
         jrb_id_button = new javax.swing.JRadioButton();
         jrb_name_button = new javax.swing.JRadioButton();
         jrb_type_button = new javax.swing.JRadioButton();
         jrb_provider_button = new javax.swing.JRadioButton();
+        jbt_clearsearch_product = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -169,6 +170,12 @@ public class UserView extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jtf_phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -187,7 +194,6 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jtf_number, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel4)
-                    .addComponent(jtf_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jbt_register_warehouse)
                         .addGap(18, 18, 18)
@@ -195,7 +201,8 @@ public class UserView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbt_edit_warehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbt_clear_warehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbt_clear_warehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(392, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -317,7 +324,7 @@ public class UserView extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("TIPO");
 
-        jcb_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcb_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celulares", "Brinquedos", "Informática", "TV", "Eletrodoméstico", "Móveis e decoração", "Roupas", "Games", "Livros", "Outro" }));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("FORNECEDOR");
@@ -354,10 +361,10 @@ public class UserView extends javax.swing.JFrame {
             }
         });
 
-        jbt_register_product1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_search_322497.png"))); // NOI18N
-        jbt_register_product1.addActionListener(new java.awt.event.ActionListener() {
+        jbt_search_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_search_322497.png"))); // NOI18N
+        jbt_search_product.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbt_register_product1ActionPerformed(evt);
+                jbt_search_productActionPerformed(evt);
             }
         });
 
@@ -376,6 +383,13 @@ public class UserView extends javax.swing.JFrame {
         buttonGroup2.add(jrb_provider_button);
         jrb_provider_button.setText("FORNECEDOR");
 
+        jbt_clearsearch_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_edit-clear_118917.png"))); // NOI18N
+        jbt_clearsearch_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_clearsearch_productActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -392,10 +406,13 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(130, 130, 130))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jcb_type, 0, 1, Short.MAX_VALUE)
+                                .addGap(35, 35, 35)))
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
                             .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -407,7 +424,7 @@ public class UserView extends javax.swing.JFrame {
                         .addComponent(jbt_edit_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jbt_clear_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jrb_id_button)
@@ -420,14 +437,16 @@ public class UserView extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbt_register_product1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jbt_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbt_clearsearch_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -457,9 +476,11 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jbt_edit_product)
                             .addComponent(jbt_clear_product)
                             .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbt_register_product1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbt_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbt_clearsearch_product, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -806,20 +827,7 @@ public class UserView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbt_register_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_warehouseActionPerformed
-
-        WarehouseDAO warehouseDAO = new WarehouseDAO();
-        Warehouse warehouse = new Warehouse();
-
-        warehouse.setStreet(jtf_street.getText());
-        warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
-        warehouse.setPhone(jtf_phone.getText());
-        warehouse.setDistrict(jtf_district.getText());
-
-        warehouseDAO.insertWarehouse(mySQLConnection, warehouse);
-
-        readWarehouseTable();
-
-        setToNullWarehouse();
+        registerWarehouse();
     }//GEN-LAST:event_jbt_register_warehouseActionPerformed
 
     private void jbt_clear_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_warehouseActionPerformed
@@ -827,73 +835,19 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbt_clear_warehouseActionPerformed
 
     private void jbt_edit_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_edit_warehouseActionPerformed
-
-        Warehouse warehouse = new Warehouse();
-        WarehouseDAO warehouseDAO = new WarehouseDAO();
-
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        int index = jTable1.getSelectedRow();
-        if (jTable1.isRowSelected(index)) {
-            warehouse.setDistrict(jtf_district.getText());
-            warehouse.setStreet(jtf_street.getText());
-            warehouse.setPhone(jtf_phone.getText());
-            warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
-
-            warehouseDAO.editWarehouse(mySQLConnection, warehouse);
-
-            readWarehouseTable();
-
-            setToNullWarehouse();
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
-        }
-
-
+        editWarehouse();
     }//GEN-LAST:event_jbt_edit_warehouseActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-
         recoveryBlanksWarehouse();
-
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jbt_delete_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_warehouseActionPerformed
-
-        Warehouse warehouse = new Warehouse();
-        WarehouseDAO warehouseDAO = new WarehouseDAO();
-
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        int index = jTable1.getSelectedRow();
-        if (jTable1.isRowSelected(index)) {
-            warehouse.setStreet(jtf_street.getText());
-
-            warehouseDAO.deleteWarehouse(mySQLConnection, warehouse.getStreet());
-
-            readWarehouseTable();
-
-            setToNullWarehouse();
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
-        }
-
-
+        deleteWarehouse();
     }//GEN-LAST:event_jbt_delete_warehouseActionPerformed
 
     private void jbt_register_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_productActionPerformed
-        Product product = new Product();
-        ProductDAO productDAO = new ProductDAO();
-
-        product.setName(jtf_name.getText());
-        product.setProvider(jtf_provider.getText());
-        product.setType(jcb_type.getSelectedItem().toString());
-
-        productDAO.insertProduct(mySQLConnection, product);
-
-        productDAO.listProductTable(mySQLConnection);
-
-        readProductTable();
-
-        setToNullProduct();
+        registerProduct();
     }//GEN-LAST:event_jbt_register_productActionPerformed
 
     private void jbt_clear_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_truckActionPerformed
@@ -916,72 +870,20 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jbt_edit_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_edit_productActionPerformed
-        Product product = new Product();
-        ProductDAO productDAO = new ProductDAO();
-
-        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
-        int index = jTable2.getSelectedRow();
-        if (jTable2.isRowSelected(index)) {
-            product.setProductID(Integer.parseInt(jtf_id.getText()));
-            product.setName(jtf_name.getText());
-            product.setType(jcb_type.getSelectedItem().toString());
-            product.setProvider(jtf_provider.getText());
-
-            productDAO.editProduct(mySQLConnection, product);
-
-            readProductTable();
-
-            setToNullProduct();
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
-        }
+        editProduct();
     }//GEN-LAST:event_jbt_edit_productActionPerformed
 
     private void jbt_delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_productActionPerformed
-        Product product = new Product();
-        ProductDAO productDAO = new ProductDAO();
-
-        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
-        int index = jTable2.getSelectedRow();
-        if (jTable2.isRowSelected(index)) {
-            product.setProductID(Integer.parseInt(jtf_id.getText()));
-
-            productDAO.deleteProduct(mySQLConnection, product.getProductID());
-
-            readProductTable();
-
-            setToNullProduct();
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
-        }
+        deleteProduct();
     }//GEN-LAST:event_jbt_delete_productActionPerformed
 
-    private void jbt_register_product1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_product1ActionPerformed
-        String filter = null;
-        String value = null;
-        if (jrb_id_button.isSelected()) {
-            filter = "id_produto";
-        }
-        if (jrb_name_button.isSelected()) {
-            filter = "nome";
-        }
-        if (jrb_type_button.isSelected()) {
-            filter = "tipo";
-        }
-        if (jrb_provider_button.isSelected()) {
-            filter = "fornecedor";
-        }
+    private void jbt_search_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_search_productActionPerformed
+        searchProduct();
+    }//GEN-LAST:event_jbt_search_productActionPerformed
 
-        value = jtf_search_product.getText();
-
-        ProductDAO productDAO = new ProductDAO();
-        productDAO.searchProduct(mySQLConnection, filter, value);
-
-        filterProductTable(filter, value);
-
-        jtf_search_product.setText("");
-
-    }//GEN-LAST:event_jbt_register_product1ActionPerformed
+    private void jbt_clearsearch_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clearsearch_productActionPerformed
+        readProductTable();
+    }//GEN-LAST:event_jbt_clearsearch_productActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1098,6 +1000,159 @@ public class UserView extends javax.swing.JFrame {
         jtf_provider.setText(dtm.getValueAt(index, 3).toString());
     }
 
+    public void registerWarehouse() {
+        if (jtf_street.getText().equals("") || jtf_number.getText().equals("") || jtf_district.getText().equals("") || jtf_phone.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha os campos!");
+        } else {
+            WarehouseDAO warehouseDAO = new WarehouseDAO();
+            Warehouse warehouse = new Warehouse();
+
+            warehouse.setStreet(jtf_street.getText());
+            warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
+            warehouse.setPhone(jtf_phone.getText());
+            warehouse.setDistrict(jtf_district.getText());
+
+            warehouseDAO.insertWarehouse(mySQLConnection, warehouse);
+
+            readWarehouseTable();
+
+            setToNullWarehouse();
+        }
+    }
+
+    public void editWarehouse() {
+        Warehouse warehouse = new Warehouse();
+        WarehouseDAO warehouseDAO = new WarehouseDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int index = jTable1.getSelectedRow();
+        if (jTable1.isRowSelected(index)) {
+            warehouse.setDistrict(jtf_district.getText());
+            warehouse.setStreet(jtf_street.getText());
+            warehouse.setPhone(jtf_phone.getText());
+            warehouse.setNumber(Integer.parseInt(jtf_number.getText()));
+
+            warehouseDAO.editWarehouse(mySQLConnection, warehouse);
+
+            readWarehouseTable();
+
+            setToNullWarehouse();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }
+
+    public void deleteWarehouse() {
+
+        Warehouse warehouse = new Warehouse();
+        WarehouseDAO warehouseDAO = new WarehouseDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int index = jTable1.getSelectedRow();
+        if (jTable1.isRowSelected(index)) {
+            warehouse.setStreet(jtf_street.getText());
+
+            warehouseDAO.deleteWarehouse(mySQLConnection, warehouse.getStreet());
+
+            readWarehouseTable();
+
+            setToNullWarehouse();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }
+
+    public void registerProduct() {
+
+        if (jtf_name.getText().equals("") || jtf_provider.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha os campos!");
+        } else {
+
+            Product product = new Product();
+            ProductDAO productDAO = new ProductDAO();
+
+            product.setName(jtf_name.getText());
+            product.setProvider(jtf_provider.getText());
+            product.setType(jcb_type.getSelectedItem().toString());
+
+            productDAO.insertProduct(mySQLConnection, product);
+
+            productDAO.listProductTable(mySQLConnection);
+
+            readProductTable();
+
+            setToNullProduct();
+        }
+    }
+
+    public void editProduct() {
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        int index = jTable2.getSelectedRow();
+        if (jTable2.isRowSelected(index)) {
+            product.setProductID(Integer.parseInt(jtf_id.getText()));
+            product.setName(jtf_name.getText());
+            product.setType(jcb_type.getSelectedItem().toString());
+            product.setProvider(jtf_provider.getText());
+
+            productDAO.editProduct(mySQLConnection, product);
+
+            readProductTable();
+
+            setToNullProduct();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }
+
+    public void deleteProduct() {
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        int index = jTable2.getSelectedRow();
+        if (jTable2.isRowSelected(index)) {
+            product.setProductID(Integer.parseInt(jtf_id.getText()));
+
+            productDAO.deleteProduct(mySQLConnection, product.getProductID());
+
+            readProductTable();
+
+            setToNullProduct();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }
+
+    public void searchProduct() {
+
+        String filter = null;
+        String value = null;
+        if (jrb_id_button.isSelected()) {
+            filter = "id_produto";
+        }
+        if (jrb_name_button.isSelected()) {
+            filter = "nome";
+        }
+        if (jrb_type_button.isSelected()) {
+            filter = "tipo";
+        }
+        if (jrb_provider_button.isSelected()) {
+            filter = "fornecedor";
+        }
+
+        value = jtf_search_product.getText();
+
+        ProductDAO productDAO = new ProductDAO();
+        productDAO.searchProduct(mySQLConnection, filter, value);
+
+        filterProductTable(filter, value);
+
+        jtf_search_product.setText("");
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1141,15 +1196,16 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JButton jbt_clear_product;
     private javax.swing.JButton jbt_clear_truck;
     private javax.swing.JButton jbt_clear_warehouse;
+    private javax.swing.JButton jbt_clearsearch_product;
     private javax.swing.JButton jbt_delete_product;
     private javax.swing.JButton jbt_delete_truck;
     private javax.swing.JButton jbt_delete_warehouse;
     private javax.swing.JButton jbt_edit_product;
     private javax.swing.JButton jbt_edit_warehouse;
     private javax.swing.JButton jbt_register_product;
-    private javax.swing.JButton jbt_register_product1;
     private javax.swing.JButton jbt_register_truck;
     private javax.swing.JButton jbt_register_warehouse;
+    private javax.swing.JButton jbt_search_product;
     private javax.swing.JComboBox<String> jcb_type;
     private javax.swing.JRadioButton jrb_female_driver;
     private javax.swing.JRadioButton jrb_id_button;
@@ -1166,7 +1222,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_name;
     private javax.swing.JTextField jtf_name_driver;
     private javax.swing.JTextField jtf_number;
-    private javax.swing.JTextField jtf_phone;
+    private javax.swing.JFormattedTextField jtf_phone;
     private javax.swing.JTextField jtf_provider;
     private javax.swing.JTextField jtf_salary_driver;
     private javax.swing.JTextField jtf_search_product;

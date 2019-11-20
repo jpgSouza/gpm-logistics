@@ -54,6 +54,7 @@ public class WarehouseDAO {
             connection.setResult(connection.getStatement().executeQuery(selectCommand));
             while (connection.getResult().next()) {
                 Warehouse warehouse = new Warehouse();
+                warehouse.setIdDeposito(connection.getResult().getInt("id_deposito"));
                 warehouse.setStreet(connection.getResult().getString("rua"));
                 warehouse.setNumber(connection.getResult().getInt("num"));
                 warehouse.setPhone(connection.getResult().getString("telefone"));
