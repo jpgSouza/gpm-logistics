@@ -6,9 +6,13 @@
 package br.bancodedados.gpm.view;
 
 import br.bancodedados.gpm.controller.MySQLConnection;
+import br.bancodedados.gpm.model.Driver;
 import br.bancodedados.gpm.model.Product;
+import br.bancodedados.gpm.model.Truck;
 import br.bancodedados.gpm.model.Warehouse;
+import br.bancodedados.gpm.model.dao.DriverDAO;
 import br.bancodedados.gpm.model.dao.ProductDAO;
+import br.bancodedados.gpm.model.dao.TruckDAO;
 import br.bancodedados.gpm.model.dao.WarehouseDAO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +37,9 @@ public class UserView extends javax.swing.JFrame {
 
         readWarehouseTable();
         readProductTable();
+        readTruckTable();
+        readDriverTable();
+
     }
 
     /**
@@ -85,6 +92,7 @@ public class UserView extends javax.swing.JFrame {
         jrb_type_button = new javax.swing.JRadioButton();
         jrb_provider_button = new javax.swing.JRadioButton();
         jbt_clearsearch_product = new javax.swing.JButton();
+        jbt_add_truck = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -105,11 +113,15 @@ public class UserView extends javax.swing.JFrame {
         jrb_male_driver = new javax.swing.JRadioButton();
         jrb_female_driver = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
-        jtf_datetime_driver = new javax.swing.JTextField();
+        jtf_datetime_driver = new javax.swing.JFormattedTextField();
         jbt_register_truck = new javax.swing.JButton();
         jbt_delete_truck = new javax.swing.JButton();
         jbt_clear_truck = new javax.swing.JButton();
+        jbt_register_driver = new javax.swing.JButton();
+        jbt_delete_driver = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -390,6 +402,13 @@ public class UserView extends javax.swing.JFrame {
             }
         });
 
+        jbt_add_truck.setText("ADICIONAR AO CAMINHÃO");
+        jbt_add_truck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_add_truckActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -403,44 +422,50 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jtf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(130, 130, 130))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jcb_type, 0, 1, Short.MAX_VALUE)
-                                .addGap(35, 35, 35)))
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jbt_register_product)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbt_delete_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbt_edit_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbt_clear_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jrb_id_button)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrb_name_button)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrb_type_button)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrb_provider_button))
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(130, 130, 130))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(jcb_type, 0, 1, Short.MAX_VALUE)
+                                        .addGap(35, 35, 35)))
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbt_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbt_register_product)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbt_delete_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbt_edit_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbt_clear_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbt_clearsearch_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbt_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jbt_clearsearch_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jbt_add_truck)
+                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                            .addComponent(jrb_id_button)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jrb_name_button)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jrb_type_button)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jrb_provider_button))))))
+                        .addContainerGap(19, Short.MAX_VALUE))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,7 +479,8 @@ public class UserView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbt_add_truck))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -463,7 +489,7 @@ public class UserView extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jrb_id_button)
                             .addComponent(jrb_name_button)
@@ -601,6 +627,12 @@ public class UserView extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("DATA");
 
+        try {
+            jtf_datetime_driver.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -626,7 +658,7 @@ public class UserView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jrb_female_driver))
                             .addComponent(jLabel13)))
-                    .addComponent(jtf_datetime_driver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_datetime_driver, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -656,15 +688,41 @@ public class UserView extends javax.swing.JFrame {
 
         jbt_register_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_add_126583.png"))); // NOI18N
         jbt_register_truck.setText("CADASTRAR");
+        jbt_register_truck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_register_truckActionPerformed(evt);
+            }
+        });
 
         jbt_delete_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_close_309090.png"))); // NOI18N
         jbt_delete_truck.setText("EXCLUIR");
+        jbt_delete_truck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_delete_truckActionPerformed(evt);
+            }
+        });
 
         jbt_clear_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_clear_all_48px_352269.png"))); // NOI18N
         jbt_clear_truck.setText("LIMPAR");
         jbt_clear_truck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbt_clear_truckActionPerformed(evt);
+            }
+        });
+
+        jbt_register_driver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_add_126583.png"))); // NOI18N
+        jbt_register_driver.setText("CADASTRAR");
+        jbt_register_driver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_register_driverActionPerformed(evt);
+            }
+        });
+
+        jbt_delete_driver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_close_309090.png"))); // NOI18N
+        jbt_delete_driver.setText("EXCLUIR");
+        jbt_delete_driver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_delete_driverActionPerformed(evt);
             }
         });
 
@@ -680,15 +738,19 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(jtf_model_truck, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtf_capacity_truck, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(97, 97, 97)
+                            .addComponent(jLabel9)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jbt_register_truck)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbt_delete_truck, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(49, 49, 49)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jbt_register_truck)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbt_delete_truck, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jbt_clear_truck, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(286, 286, 286)
+                        .addComponent(jbt_register_driver)
+                        .addGap(38, 38, 38)
+                        .addComponent(jbt_delete_driver, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -705,50 +767,106 @@ public class UserView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtf_capacity_truck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbt_register_truck)
-                    .addComponent(jbt_delete_truck)
-                    .addComponent(jbt_clear_truck))
-                .addGap(30, 30, 30))
+                        .addComponent(jtf_capacity_truck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbt_delete_truck)
+                            .addComponent(jbt_register_truck))))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addComponent(jbt_clear_truck)
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbt_delete_driver)
+                            .addComponent(jbt_register_driver))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "MODELO", "CAPACIDADE", "NOME", "IDADE", "SEXO", "DATA", "SALÁRIO"
+                "MODELO", "CAPACIDADE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "NOME", "IDADE", "SALARIO", "SEXO", "DATA ENTRADA"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(jTable3);
@@ -757,10 +875,14 @@ public class UserView extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
 
@@ -844,6 +966,7 @@ public class UserView extends javax.swing.JFrame {
 
     private void jbt_delete_warehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_warehouseActionPerformed
         deleteWarehouse();
+        readProductTable();
     }//GEN-LAST:event_jbt_delete_warehouseActionPerformed
 
     private void jbt_register_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_productActionPerformed
@@ -851,7 +974,9 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbt_register_productActionPerformed
 
     private void jbt_clear_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_truckActionPerformed
-        // TODO add your handling code here:
+        setToNullTruckAndDriver();
+        jtf_model_truck.setEditable(true);
+        jtf_capacity_truck.setEditable(true);
     }//GEN-LAST:event_jbt_clear_truckActionPerformed
 
     private void jbt_clear_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_productActionPerformed
@@ -884,6 +1009,51 @@ public class UserView extends javax.swing.JFrame {
     private void jbt_clearsearch_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clearsearch_productActionPerformed
         readProductTable();
     }//GEN-LAST:event_jbt_clearsearch_productActionPerformed
+
+    private void jbt_register_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_truckActionPerformed
+        registerTruck();
+    }//GEN-LAST:event_jbt_register_truckActionPerformed
+
+    private void jbt_delete_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_truckActionPerformed
+        deleteTruck();
+    }//GEN-LAST:event_jbt_delete_truckActionPerformed
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        recoveryBlanksTruck();
+    }//GEN-LAST:event_jTable4MouseClicked
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        recoveryBlanksDriver();
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jbt_register_driverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_driverActionPerformed
+        registerDriver();
+    }//GEN-LAST:event_jbt_register_driverActionPerformed
+
+    private void jbt_delete_driverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_driverActionPerformed
+        deleteDriver();
+    }//GEN-LAST:event_jbt_delete_driverActionPerformed
+
+    private void jbt_add_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_add_truckActionPerformed
+        
+        /*
+        Product product = new Product();
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        int index = jTable2.getSelectedRow();
+        if (jTable2.isRowSelected(index)) {
+            product.setProductID(Integer.parseInt(jtf_id.getText()));
+            readProductTable();
+
+            setToNullProduct();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+        */
+        TelaCaminhão t = new TelaCaminhão();
+        t.setVisible(true);
+        
+    }//GEN-LAST:event_jbt_add_truckActionPerformed
 
     /**
      * @param args the command line arguments
@@ -934,6 +1104,16 @@ public class UserView extends javax.swing.JFrame {
         jcb_type.setSelectedIndex(0);
     }
 
+    public void setToNullTruckAndDriver() {
+        jtf_model_truck.setText("");
+        jtf_capacity_truck.setText("");
+        jtf_name_driver.setText("");
+        jtf_salary_driver.setText("");
+        jtf_age_driver.setText("");
+        jtf_datetime_driver.setText("");
+        buttonGroup2.clearSelection();
+    }
+
     public void readWarehouseTable() {
 
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
@@ -966,8 +1146,37 @@ public class UserView extends javax.swing.JFrame {
         }
     }
 
-    public void filterProductTable(String filter, String value) {
+    public void readTruckTable() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable4.getModel();
+        dtm.setNumRows(0);
+        TruckDAO truckDAO = new TruckDAO();
 
+        for (Truck t : truckDAO.listTruckTable(mySQLConnection)) {
+            dtm.addRow(new Object[]{
+                t.getModel(),
+                t.getCapacity()
+            });
+        }
+
+    }
+
+    public void readDriverTable() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable3.getModel();
+        dtm.setNumRows(0);
+        DriverDAO driverDAO = new DriverDAO();
+
+        for (Driver d : driverDAO.listDriverTable(mySQLConnection)) {
+            dtm.addRow(new Object[]{
+                d.getName(),
+                d.getAge(),
+                d.getSalary(),
+                d.getGender(),
+                d.getDate()
+            });
+        }
+    }
+
+    public void filterProductTable(String filter, String value) {
         DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
         dtm.setNumRows(0);
         ProductDAO productDAO = new ProductDAO();
@@ -998,6 +1207,22 @@ public class UserView extends javax.swing.JFrame {
         jtf_name.setText(dtm.getValueAt(index, 1).toString());
         jcb_type.setSelectedItem(dtm.getValueAt(index, 2).toString());
         jtf_provider.setText(dtm.getValueAt(index, 3).toString());
+    }
+
+    public void recoveryBlanksTruck() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable4.getModel();
+        int index = jTable4.getSelectedRow();
+        jtf_model_truck.setText(dtm.getValueAt(index, 0).toString());
+        jtf_capacity_truck.setText(dtm.getValueAt(index, 1).toString());
+    }
+
+    public void recoveryBlanksDriver() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable3.getModel();
+        int index = jTable3.getSelectedRow();
+        jtf_name_driver.setText(dtm.getValueAt(index, 0).toString());
+        jtf_age_driver.setText(dtm.getValueAt(index, 1).toString());
+        jtf_datetime_driver.setText(dtm.getValueAt(index, 2).toString());
+        jtf_salary_driver.setText(dtm.getValueAt(index, 3).toString());
     }
 
     public void registerWarehouse() {
@@ -1154,6 +1379,94 @@ public class UserView extends javax.swing.JFrame {
 
     }
 
+    public void registerTruck() {
+
+        if (jtf_model_truck.getText().equals("") || jtf_capacity_truck.getText().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Preencha os campos!");
+        } else {
+            Truck truck = new Truck();
+            TruckDAO truckDAO = new TruckDAO();
+
+            truck.setModel(jtf_model_truck.getText());
+            truck.setCapacity(Integer.parseInt(jtf_capacity_truck.getText()));
+
+            truckDAO.insertTruck(mySQLConnection, truck);
+
+            readTruckTable();
+
+            setToNullTruckAndDriver();
+        }
+
+    }
+
+    public void deleteTruck() {
+        Truck truck = new Truck();
+        TruckDAO truckDAO = new TruckDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable4.getModel();
+        int index = jTable4.getSelectedRow();
+        if (jTable4.isRowSelected(index)) {
+            truck.setModel(jtf_model_truck.getText());
+
+            truckDAO.deleteTruck(mySQLConnection, truck.getModel());
+
+            readTruckTable();
+
+            setToNullTruckAndDriver();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }
+
+    public void registerDriver() {
+
+        if (jtf_name_driver.getText().equals("") || jtf_salary_driver.getText().equals("") || jtf_datetime_driver.getText().equals("") || jtf_age_driver.getText().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Preencha os campos!");
+        } else {
+            Driver driver = new Driver();
+            DriverDAO driverDAO = new DriverDAO();
+
+            driver.setName(jtf_name_driver.getText());
+            driver.setSalary(jtf_salary_driver.getText());
+            if (jrb_male_driver.isSelected()) {
+                driver.setGender("Masculino");
+            }
+            if (jrb_female_driver.isSelected()) {
+                driver.setGender("Feminino");
+            }
+            driver.setDate(jtf_datetime_driver.getText());
+            driver.setAge(Integer.parseInt(jtf_age_driver.getText()));
+
+            driverDAO.insertDriver(mySQLConnection, driver);
+
+            readDriverTable();
+
+            setToNullTruckAndDriver();
+        }
+
+    }
+
+    public void deleteDriver() {
+        Driver driver = new Driver();
+        DriverDAO driverDAO = new DriverDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable3.getModel();
+        int index = jTable3.getSelectedRow();
+        if (jTable3.isRowSelected(index)) {
+            driver.setName(jtf_name_driver.getText());
+
+            driverDAO.deleteDriver(mySQLConnection, driver.getName());
+
+            readDriverTable();
+
+            setToNullTruckAndDriver();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1189,19 +1502,24 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JButton jbt_add_truck;
     private javax.swing.JButton jbt_clear_product;
     private javax.swing.JButton jbt_clear_truck;
     private javax.swing.JButton jbt_clear_warehouse;
     private javax.swing.JButton jbt_clearsearch_product;
+    private javax.swing.JButton jbt_delete_driver;
     private javax.swing.JButton jbt_delete_product;
     private javax.swing.JButton jbt_delete_truck;
     private javax.swing.JButton jbt_delete_warehouse;
     private javax.swing.JButton jbt_edit_product;
     private javax.swing.JButton jbt_edit_warehouse;
+    private javax.swing.JButton jbt_register_driver;
     private javax.swing.JButton jbt_register_product;
     private javax.swing.JButton jbt_register_truck;
     private javax.swing.JButton jbt_register_warehouse;
@@ -1215,7 +1533,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrb_type_button;
     private javax.swing.JTextField jtf_age_driver;
     private javax.swing.JTextField jtf_capacity_truck;
-    private javax.swing.JTextField jtf_datetime_driver;
+    private javax.swing.JFormattedTextField jtf_datetime_driver;
     private javax.swing.JTextField jtf_district;
     private javax.swing.JTextField jtf_id;
     private javax.swing.JTextField jtf_model_truck;

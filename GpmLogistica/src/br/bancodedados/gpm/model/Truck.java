@@ -12,5 +12,27 @@ package br.bancodedados.gpm.model;
 public class Truck {
     private String model;
     private int capacity;
+    private int id;
     
+    public String getModel() {
+        return model;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+    
+   
 }

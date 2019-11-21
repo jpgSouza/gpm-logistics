@@ -7,8 +7,8 @@ create table if not exists motorista(
     nome varchar(30) not null,
     idade integer not null,
     salario varchar(10),
-    sexo varchar(1),
-    data_entrada date,
+    sexo varchar(15),
+    data_entrada varchar(40),
     
     primary key (id_motorista)
 );
@@ -102,3 +102,5 @@ add constraint fk_id_produto
 drop database transportadora;    
 select * from deposito;
 select * from produto;
+select * from caminhao;
+select * from motorista;
