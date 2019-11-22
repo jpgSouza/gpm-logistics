@@ -37,12 +37,12 @@ public class TruckDAO {
 
     }
 
-    public boolean insertProductInTruck(MySQLConnection connection, int idProduct, Truck truck) {
+    public boolean insertProductInTruck(MySQLConnection connection, int idProduct, int idTruck) {
         String insertCommand = "UPDATE caminhao SET id_produto = ? WHERE id_caminhao = ?";
         try {
             connection.setPreparedStatement(connection.getConnection().prepareStatement(insertCommand));
             connection.getPreparedStatement().setInt(1, idProduct);
-            connection.getPreparedStatement().setInt(2, truck.getId());
+            connection.getPreparedStatement().setInt(2, idTruck);
             connection.getPreparedStatement().execute();
             sucess = true;
             JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
@@ -66,7 +66,7 @@ public class TruckDAO {
                 Truck truck = new Truck();
                 truck.setCapacity(connection.getResult().getInt("capacidade"));
                 truck.setModel(connection.getResult().getString("modelo"));
-
+                truck.setId(connection.getResult().getInt("id_caminhao"));
                 truckList.add(truck);
             }
             sucess = true;

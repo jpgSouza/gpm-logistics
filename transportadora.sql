@@ -104,3 +104,4 @@ select * from deposito;
 select * from produto;
 select * from caminhao;
 select * from motorista;
+select * from motorista_drives_caminhao;

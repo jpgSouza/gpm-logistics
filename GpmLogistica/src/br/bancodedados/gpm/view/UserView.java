@@ -124,6 +124,7 @@ public class UserView extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jPanel11 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -297,7 +298,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -402,6 +403,7 @@ public class UserView extends javax.swing.JFrame {
             }
         });
 
+        jbt_add_truck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_ic_exit_to_app_48px_352328.png"))); // NOI18N
         jbt_add_truck.setText("ADICIONAR AO CAMINHÃO");
         jbt_add_truck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,49 +425,45 @@ public class UserView extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jtf_provider, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(130, 130, 130))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jcb_type, 0, 1, Short.MAX_VALUE)
+                                .addGap(35, 35, 35)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jbt_register_product)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbt_delete_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbt_edit_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbt_clear_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(130, 130, 130))
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jcb_type, 0, 1, Short.MAX_VALUE)
-                                        .addGap(35, 35, 35)))
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jbt_register_product)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbt_delete_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbt_edit_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbt_clear_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbt_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jtf_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbt_search_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jbt_clearsearch_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jbt_add_truck)
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                            .addComponent(jrb_id_button)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jrb_name_button)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jrb_type_button)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jrb_provider_button))))))
-                        .addContainerGap(19, Short.MAX_VALUE))))
+                                .addComponent(jbt_clearsearch_product, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jbt_add_truck)
+                                .addGroup(jPanel7Layout.createSequentialGroup()
+                                    .addComponent(jrb_id_button)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jrb_name_button)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jrb_type_button)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jrb_provider_button))))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,7 +560,7 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -882,8 +880,8 @@ public class UserView extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -908,6 +906,21 @@ public class UserView extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("CAMINHÃO", new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_truck_1608963.png")), jPanel3); // NOI18N
+
+        jPanel11.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 928, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 428, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("CONTROLE", new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_basics-09_296825 (3).png")), jPanel11); // NOI18N
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/bancodedados/gpm/image/iconfinder_disc-list_1954536.png"))); // NOI18N
         jMenu1.setText("Opções");
@@ -975,8 +988,7 @@ public class UserView extends javax.swing.JFrame {
 
     private void jbt_clear_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_truckActionPerformed
         setToNullTruckAndDriver();
-        jtf_model_truck.setEditable(true);
-        jtf_capacity_truck.setEditable(true);
+        enableFields();
     }//GEN-LAST:event_jbt_clear_truckActionPerformed
 
     private void jbt_clear_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_clear_productActionPerformed
@@ -1016,43 +1028,31 @@ public class UserView extends javax.swing.JFrame {
 
     private void jbt_delete_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_truckActionPerformed
         deleteTruck();
+        enableFields();
     }//GEN-LAST:event_jbt_delete_truckActionPerformed
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         recoveryBlanksTruck();
+        disableFieldsTruck();
     }//GEN-LAST:event_jTable4MouseClicked
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         recoveryBlanksDriver();
+        disableFieldsDriver();
     }//GEN-LAST:event_jTable3MouseClicked
 
     private void jbt_register_driverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_register_driverActionPerformed
         registerDriver();
+        enableFields();
     }//GEN-LAST:event_jbt_register_driverActionPerformed
 
     private void jbt_delete_driverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_delete_driverActionPerformed
         deleteDriver();
+        enableFields();
     }//GEN-LAST:event_jbt_delete_driverActionPerformed
 
     private void jbt_add_truckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_add_truckActionPerformed
-        
-        /*
-        Product product = new Product();
-        
-        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
-        int index = jTable2.getSelectedRow();
-        if (jTable2.isRowSelected(index)) {
-            product.setProductID(Integer.parseInt(jtf_id.getText()));
-            readProductTable();
-
-            setToNullProduct();
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
-        }
-        */
-        TelaCaminhão t = new TelaCaminhão();
-        t.setVisible(true);
-        
+        addProductTruck();
     }//GEN-LAST:event_jbt_add_truckActionPerformed
 
     /**
@@ -1221,8 +1221,10 @@ public class UserView extends javax.swing.JFrame {
         int index = jTable3.getSelectedRow();
         jtf_name_driver.setText(dtm.getValueAt(index, 0).toString());
         jtf_age_driver.setText(dtm.getValueAt(index, 1).toString());
-        jtf_datetime_driver.setText(dtm.getValueAt(index, 2).toString());
-        jtf_salary_driver.setText(dtm.getValueAt(index, 3).toString());
+        jtf_salary_driver.setText(dtm.getValueAt(index, 2).toString());
+        jtf_datetime_driver.setText(dtm.getValueAt(index, 4).toString());
+        
+        
     }
 
     public void registerWarehouse() {
@@ -1467,6 +1469,47 @@ public class UserView extends javax.swing.JFrame {
         }
     }
 
+    public void addProductTruck() {
+        Product product = new Product();
+        ProductDAO productDAO = new ProductDAO();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        int index = jTable2.getSelectedRow();
+        if (jTable2.isRowSelected(index)) {
+            product.setProductID(Integer.parseInt(jtf_id.getText()));
+            TruckDAO truckDAO = new TruckDAO();
+            ListTruckView t = new ListTruckView(mySQLConnection, product.getProductID());
+            t.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item da tabela");
+        }
+    }
+
+    public void disableFieldsTruck(){
+        jtf_model_truck.setEditable(false);
+        jtf_capacity_truck.setEditable(false);
+    }
+    
+    public void disableFieldsDriver(){
+        jtf_name_driver.setEditable(false);
+        jtf_age_driver.setEditable(false);
+        jtf_datetime_driver.setEditable(false);
+        jtf_salary_driver.setEditable(false);
+        jrb_female_driver.setEnabled(false);
+        jrb_male_driver.setEnabled(false);
+    }
+    
+    public void enableFields(){
+        jtf_model_truck.setEditable(true);
+        jtf_capacity_truck.setEditable(true);
+        jtf_name_driver.setEditable(true);
+        jtf_age_driver.setEditable(true);
+        jtf_datetime_driver.setEditable(true);
+        jtf_salary_driver.setEditable(true);
+        jrb_female_driver.setEnabled(true);
+        jrb_male_driver.setEnabled(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1491,6 +1534,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
